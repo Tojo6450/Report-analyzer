@@ -2,10 +2,16 @@ import { useState, useEffect } from 'react';
 import axios from 'axios';
 import UploadForm from '../components/UploadForm';
 import ReportList from '../components/ReportList';
+import ConfirmationModal from '../components/ConfirmationModal';
 
 const HomePage = () => {
     const [reports, setReports] = useState([]);
     const [error, setError] = useState('');
+    
+    const [deleteModal, setDeleteModal] = useState({
+        isOpen: false,
+        reportId: null,
+    });
 
     const fetchReports = async () => {
         try {
@@ -22,22 +28,40 @@ const HomePage = () => {
         fetchReports();
     }, []);
 
-    const handleDelete = async (reportId) => {
-        if (window.confirm('Are you sure you want to delete this report?')) {
-            try {
-                await axios.delete(`http://localhost:5000/api/reports/${reportId}`);
-                fetchReports(); 
-            // eslint-disable-next-line no-unused-vars
-            } catch (err) {
-                setError('Failed to delete the report.');
-            }
+    const handleDeleteClick = (reportId) => {
+        setDeleteModal({
+            isOpen: true,
+            reportId: reportId,
+        });
+    };
+
+    const confirmDelete = async () => {
+        try {
+            await axios.delete(`http://localhost:5000/api/reports/${deleteModal.reportId}`);
+            fetchReports();
+        // eslint-disable-next-line no-unused-vars
+        } catch (err) {
+            setError('Failed to delete the report.');
+        } finally {
+            setDeleteModal({ isOpen: false, reportId: null });
         }
+    };
+
+    const cancelDelete = () => {
+        setDeleteModal({ isOpen: false, reportId: null });
     };
 
     return (
         <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-indigo-50 py-6 px-4 sm:px-6 lg:px-8">
             <div className="max-w-7xl mx-auto">
-                {/* Header */}
+                <ConfirmationModal
+                    isOpen={deleteModal.isOpen}
+                    title="Confirm Deletion"
+                    message="Are you sure you want to delete this report? This action cannot be undone."
+                    onConfirm={confirmDelete}
+                    onCancel={cancelDelete}
+                />
+                
                 <div className="text-center mb-8 sm:mb-12">
                     <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-gray-900 mb-2 sm:mb-3">
                         Report Management
@@ -48,7 +72,6 @@ const HomePage = () => {
                 </div>
 
                 <div className="space-y-8 sm:space-y-12">
-                    {/* Upload Form Section */}
                     <section className="bg-white rounded-2xl shadow-lg hover:shadow-xl transition-shadow duration-300 p-6 sm:p-8 lg:p-10">
                         <div className="flex items-center gap-3 mb-6">
                             <div className="w-1 h-8 bg-gradient-to-b from-blue-500 to-indigo-600 rounded-full"></div>
@@ -59,7 +82,6 @@ const HomePage = () => {
                         <UploadForm onUploadSuccess={fetchReports} />
                     </section>
                     
-                    {/* Error Display */}
                     {error && (
                         <div className="animate-pulse">
                             <div className="p-4 sm:p-5 bg-red-50 text-red-700 border-l-4 border-red-500 rounded-lg shadow-md">
@@ -73,7 +95,6 @@ const HomePage = () => {
                         </div>
                     )}
 
-                    {/* Previously Generated Reports Section */}
                     <section className="bg-white rounded-2xl shadow-lg hover:shadow-xl transition-shadow duration-300 p-6 sm:p-8 lg:p-10">
                         <div className="flex items-center gap-3 mb-6">
                             <div className="w-1 h-8 bg-gradient-to-b from-blue-500 to-indigo-600 rounded-full"></div>
@@ -81,7 +102,7 @@ const HomePage = () => {
                                 Previously Generated Reports
                             </h2>
                         </div>
-                        <ReportList reports={reports} onDelete={handleDelete} />
+                        <ReportList reports={reports} onDelete={handleDeleteClick} />
                     </section>
                 </div>
             </div>
