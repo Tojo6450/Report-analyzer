@@ -46,7 +46,7 @@ const UploadForm = ({ onUploadSuccess }) => {
         formData.append('xmlfile', fileToUpload);
 
         try {
-            const response = await axios.put(`http://localhost:5000/api/reports/${reportId}`, formData, {
+            const response = await axios.put(`${import.meta.env.VITE_API_URL}/api/reports/${reportId}`, formData, {
                 headers: { 'Content-Type': 'multipart/form-data' },
             });
             onUploadSuccess();
@@ -71,7 +71,7 @@ const UploadForm = ({ onUploadSuccess }) => {
         formData.append('xmlfile', selectedFile);
 
         try {
-            const response = await axios.post('http://localhost:5000/api/reports/upload', formData, {
+            const response = await axios.post(`${import.meta.env.VITE_API_URL}/api/reports/upload`, formData, {
                 headers: { 'Content-Type': 'multipart/form-data' },
             });
             onUploadSuccess();

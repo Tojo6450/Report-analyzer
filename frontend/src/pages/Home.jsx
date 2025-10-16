@@ -16,7 +16,7 @@ const HomePage = () => {
     const fetchReports = async () => {
         try {
             setError('');
-            const { data } = await axios.get('http://localhost:5000/api/reports');
+            const { data } = await axios.get(`${import.meta.env.VITE_API_URL}/api/reports`);
             setReports(data);
         // eslint-disable-next-line no-unused-vars
         } catch (err) {
@@ -37,7 +37,7 @@ const HomePage = () => {
 
     const confirmDelete = async () => {
         try {
-            await axios.delete(`http://localhost:5000/api/reports/${deleteModal.reportId}`);
+            await axios.delete(`${import.meta.env.VITE_API_URL}/api/reports/${deleteModal.reportId}`);
             fetchReports();
         // eslint-disable-next-line no-unused-vars
         } catch (err) {

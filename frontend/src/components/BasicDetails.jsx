@@ -1,6 +1,6 @@
 const DetailItem = ({ label, value, icon, iconBg }) => (
     <div className="bg-white p-4 sm:p-6 rounded-xl shadow-sm hover:shadow-md transition-all duration-200 border border-gray-100">
-        {/* Top row for icon and label */}
+
         <div className="flex items-center gap-3 mb-2">
             <div className={`w-10 h-10 ${iconBg} rounded-lg flex items-center justify-center flex-shrink-0`}>
                 {icon}
@@ -9,7 +9,6 @@ const DetailItem = ({ label, value, icon, iconBg }) => (
                 {label}
             </p>
         </div>
-        {/* Value is now on its own line, centered, and will break if too long */}
         <p className="text-lg font-bold text-gray-900 text-center break-all pt-2">
             {value || 'N/A'}
         </p>
@@ -21,7 +20,7 @@ const BasicDetails = ({ data }) => {
 
     return (
         <section className="w-full">
-            {/* Section Header */}
+
             <div className="flex items-center gap-3 mb-6">
                 <div className="w-1.5 h-8 bg-gradient-to-b from-blue-500 to-indigo-600 rounded-full"></div>
                 <h2 className="text-2xl sm:text-3xl font-bold text-gray-900">
@@ -29,9 +28,7 @@ const BasicDetails = ({ data }) => {
                 </h2>
             </div>
 
-            {/* Details Grid */}
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-5">
-                {/* Name */}
                 <DetailItem 
                     label="Name" 
                     value={data.name}
@@ -43,7 +40,6 @@ const BasicDetails = ({ data }) => {
                     iconBg="bg-blue-100"
                 />
 
-                {/* Mobile Phone */}
                 <DetailItem 
                     label="Mobile Phone" 
                     value={data.mobilePhone}
@@ -55,7 +51,7 @@ const BasicDetails = ({ data }) => {
                     iconBg="bg-green-100"
                 />
 
-                {/* PAN */}
+
                 <DetailItem 
                     label="PAN" 
                     value={data.pan}
@@ -67,7 +63,6 @@ const BasicDetails = ({ data }) => {
                     iconBg="bg-purple-100"
                 />
 
-                {/* Credit Score - Special Card */}
                 <div className="bg-gradient-to-br from-green-500 to-emerald-600 p-4 sm:p-6 rounded-xl shadow-lg hover:shadow-xl transition-all duration-200">
                     <div className="flex items-center gap-3 mb-3">
                         <div className="w-10 h-10 bg-white/20 rounded-lg flex items-center justify-center flex-shrink-0">

@@ -8,7 +8,6 @@ function App() {
     <Router>
       <main className="min-h-screen font-sans bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50">
         <div className="container mx-auto px-4 py-6 md:px-6 md:py-8 lg:px-8">
-          {/* Header Section */}
           <header className="text-center mb-8 md:mb-12 animate-fade-in">
             <div className="inline-block mb-4">
               <div className="w-16 h-16 md:w-20 md:h-20 mx-auto bg-gradient-to-br from-blue-600 to-indigo-600 rounded-2xl shadow-lg flex items-center justify-center transform hover:scale-105 transition-transform duration-300">
@@ -25,7 +24,6 @@ function App() {
             </p>
           </header>
 
-          {/* Main Content Card */}
           <div className="bg-white rounded-2xl shadow-2xl p-6 md:p-10 lg:p-12 max-w-5xl mx-auto backdrop-blur-sm bg-opacity-95 border border-gray-100">
             <Routes>
               <Route path="/" element={<HomePage />} />
@@ -34,7 +32,7 @@ function App() {
             </Routes>
           </div>
 
-          {/* Decorative Background Elements */}
+      
           <div className="fixed top-0 left-0 w-full h-full pointer-events-none overflow-hidden -z-10">
             <div className="absolute top-20 left-10 w-72 h-72 bg-blue-200 rounded-full mix-blend-multiply filter blur-3xl opacity-30 animate-blob"></div>
             <div className="absolute top-40 right-10 w-72 h-72 bg-purple-200 rounded-full mix-blend-multiply filter blur-3xl opacity-30 animate-blob animation-delay-2000"></div>
@@ -42,7 +40,7 @@ function App() {
           </div>
         </div>
 
-        {/* Footer */}
+    
         <footer className="text-center py-8 mt-12">
           <div className="max-w-4xl mx-auto px-4">
             <div className="h-px bg-gradient-to-r from-transparent via-gray-300 to-transparent mb-6"></div>

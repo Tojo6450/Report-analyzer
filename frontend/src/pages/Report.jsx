@@ -16,7 +16,7 @@ const ReportPage = () => {
         const fetchReport = async () => {
             try {
                 setLoading(true);
-                const { data } = await axios.get(`http://localhost:5000/api/reports/${id}`);
+                const { data } = await axios.get(`${import.meta.env.VITE_API_URL}/api/reports/${id}`);
                 setReport(data);
             } catch (err) {
                 setError('Failed to fetch report. Please try again.');
